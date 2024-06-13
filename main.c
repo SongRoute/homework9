@@ -4,11 +4,13 @@
 
 #define MAX_VERTICES 10
 
+// 그래프의 인접 리스트를 구현하기 위한 구조체
 typedef struct Node {
     int vertex;
     struct Node* next;
 } Node;
 
+// 그래프를 구현하기 위한 구조체
 typedef struct Graph {
     Node* adjLists[MAX_VERTICES];
     bool visited[MAX_VERTICES];
@@ -57,6 +59,7 @@ void menu() {
     printf("----------------------------------------------------------------\n");
 }
 
+// 그래프를 생성하는 함수
 Graph* createGraph() {
     Graph* graph = (Graph*)malloc(sizeof(Graph));
     for (int i = 0; i < MAX_VERTICES; i++) {
@@ -66,6 +69,7 @@ Graph* createGraph() {
     return graph;
 }
 
+// 정점을 추가하는 함수
 void addVertex(Graph* graph, int vertex) {
     if (vertex < 0 || vertex >= MAX_VERTICES) {
         printf("Invalid vertex number.\n");
@@ -74,6 +78,7 @@ void addVertex(Graph* graph, int vertex) {
     }
 }
 
+// 간선을 추가하는 함수
 void addEdge(Graph* graph, int src, int dest) {
     if (src < 0 || src >= MAX_VERTICES || dest < 0 || dest >= MAX_VERTICES) {
         printf("Invalid edge.\n");
@@ -94,6 +99,7 @@ void addEdge(Graph* graph, int src, int dest) {
     printf("Edge from %d to %d added.\n", src, dest);
 }
 
+// 깊이 우선 탐색
 void DFS(Graph* graph, int startVertex) {
     initializeVisited(graph);
 
@@ -126,6 +132,7 @@ void DFS(Graph* graph, int startVertex) {
     printf("\n");
 }
 
+// 너비 우선 탐색
 void BFS(Graph* graph, int startVertex) {
     initializeVisited(graph);
 
@@ -159,6 +166,7 @@ void BFS(Graph* graph, int startVertex) {
     printf("\n");
 }
 
+// 그래프 출력
 void printGraph(Graph* graph) {
     for (int v = 0; v < MAX_VERTICES; v++) {
         Node* temp = graph->adjLists[v];
@@ -171,12 +179,14 @@ void printGraph(Graph* graph) {
     }
 }
 
+// 방문 여부 초기화
 void initializeVisited(Graph* graph) {
     for (int i = 0; i < MAX_VERTICES; i++) {
         graph->visited[i] = false;
     }
 }
 
+// 명령어 처리
 void handleCommand(char command, Graph* graph) {
     int vertex, src, dest;
     switch (command) {
