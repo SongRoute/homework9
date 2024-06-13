@@ -28,6 +28,8 @@ int main() {
     Graph* graph = createGraph();
     char command;
 
+    printf("[----- [송 동 선] [2023078041] -----]\n");
+
     while (1) {
         menu();
         printf("Command: ");
